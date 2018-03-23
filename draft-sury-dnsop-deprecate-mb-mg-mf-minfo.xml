@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type='text/xsl' href='./rfc2629.xslt' ?>
+
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY RFC2119 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC1035 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1035.xml">
+]>
+
+<?rfc toc="yes"?>
+<?rfc strict="yes" ?>
+<?rfc linkmailto="yes" ?>
+<?rfc symrefs="yes"?>
+<?rfc compact="yes" ?>
+<?rfc subcompact="no" ?>
+<?rfc sortrefs="no" ?>
+<?rfc rfcedstyle="yes"?>
+
+<rfc ipr="trust200902" docName="draft-ietf-dnsop-algorithm-update-00" category="std">
+  <front>
+    <title abbrev="Deprecating old mail RRTYPES">Deprecating MB, MG, MF and MINFO Resource Records</title>
+    <author fullname="Ondrej Sury" initials="O." surname="Sury">
+      <organization>Internet Systems Consortium</organization>
+      <address>
+	<postal>
+	  <street/>
+	  <country>CZ</country>
+	</postal>
+        <email>ondrej@isc.org</email>
+      </address>
+    </author>
+    <date year="2018"/>
+    <area>Ops</area>
+    <workgroup>dnsop</workgroup>
+    <keyword>Internet-Draft</keyword>
+    <abstract>
+      <t>
+	This document deprecates MB, MG, MF and MINFO Resource
+	Records.  This document obsoletes <xref target="RFC1035"/>.
+      </t>
+    </abstract>
+  </front>
+  <!-- ====================================================================== -->
+  <middle>
+
+    <section anchor="introduction" title="Introduction">
+      <t>
+	The <xref target="RFC1035"/> defines couple of old resource
+	records that are not being used, and they are causing
+	operational problems between implementations that support them
+	and that don't supported them due DNS compression on the wire.
+	This document deprecates such records to allow the
+	implementations to drop the specific support for such records.
+      </t>
+    </section>
+    <section title="Deprecating MB, MG, MF and MINFO Resource Records">
+      <t>
+	The MB, MG, MF and MINFO Resource Records aren't used in any
+	existing standards, and this documents deprecates the usage.
+	The DNS implementations compliant with this document MUST NOT
+	implement MB, MG, MF and MINFO Resource Records and treat them
+	as a generic type effectively disabling the compression in
+	those types.
+      </t>
+      </section>
+
+      <section anchor="iana" title="IANA Considerations">
+	<t>This documents updates the IANA registry "Domain Name System (DNS) Parameters" (<xref target="DNS-IANA"/>).</t>
+	
+	<texttable>
+          <ttcol>TYPE</ttcol>     <ttcol>Value</ttcol>      <ttcol>Meaning</ttcol>      <ttcol>Reference</ttcol>
+	  <c>MB</c>               <c>7</c>                  <c>a mailbox domain name (OBSOLETE)</c> <c>This document</c>
+	  <c>MG</c>               <c>8</c>                  <c>a mail group member (OBSOLETE)</c> <c>This document</c>
+	  <c>MR</c>               <c>9</c>                  <c>a mail rename domain name (OBSOLETE)</c> <c>This document</c>
+	  <c>MR</c>               <c>14</c>                 <c>mailbox or mail list information (OBSOLETE)</c> <c>This document</c>
+	</texttable>
+      </section>
+
+    <section anchor="security" title="Security Considerations">
+
+      <t>
+	This document has not security considerations.
+      </t>
+    </section>
+
+    <section anchor="operation" title="Operational Considerations">
+      <t>
+	The various status of implementation of MB, MG, MR and MINFO
+	records is already causing operational problems between DNS
+	implementations that do implement aforementioned types and
+	those who don't because of mandatory DNS compression on the
+	wire.  This document aims to rectify the situation by removing
+	the support for all the DNS implementations.  This should not
+	cause any operational problems because the records aren't
+	actually in use on the Internet. [COMMENT: Some data?]
+      </t>
+    </section>
+
+    <section anchor="ack" title="Acknowledgements">
+      <t>
+	Peter van Dijk for poking me to write the draft.
+      </t>
+    </section>
+
+  </middle>
+  <!-- ====================================================================== -->
+  <back>
+    <references title="Normative References">
+      &RFC1035;
+    </references>
+    <references title="Informative References">
+      <reference anchor="DNS-IANA" target="https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml">
+        <front>
+          <title>Domain Name System (DNS) Parameters</title>
+          <author initials="" surname="" fullname="">
+            <organization />
+          </author>
+          <date />
+        </front>
+      </reference>
+    </references>
+    <!-- ====================================================================== -->
+  </back>
+</rfc>
