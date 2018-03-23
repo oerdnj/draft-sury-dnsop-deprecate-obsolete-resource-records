@@ -10,7 +10,7 @@ Expires: September 24, 2018
 
 
                Deprecating obsolete DNS Resource Records
-             draft-sury-deprecate-obsolete-resource-records
+           draft-sury-deprecate-obsolete-resource-records-00
 
 Abstract
 

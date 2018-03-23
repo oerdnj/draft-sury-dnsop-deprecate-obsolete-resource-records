@@ -4,6 +4,8 @@
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!ENTITY RFC2119 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY RFC1035 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1035.xml">
+<!ENTITY RFC3597 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3597.xml">
+<!ENTITY RFC4034 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4034.xml">
 ]>
 
 <?rfc toc="yes"?>
@@ -15,9 +17,9 @@
 <?rfc sortrefs="no" ?>
 <?rfc rfcedstyle="yes"?>
 
-<rfc ipr="trust200902" docName="draft-sury-deprecate-obsolete-resource-records" category="std" updates="1035">
+<rfc ipr="trust200902" docName="draft-sury-deprecate-obsolete-resource-records-00" category="std" updates="1035,3597,4035">
   <front>
-    <title abbrev="Deprecating old mail RRTYPES">Deprecating obsolete DNS Resource Records</title>
+    <title abbrev="Deprecating old mail RRTYPES">Deprecating obsolete DNS Resource Records Types</title>
     <author fullname="Ondrej Sury" initials="O." surname="Sury">
       <organization>Internet Systems Consortium</organization>
       <address>
@@ -34,9 +36,11 @@
     <keyword>Internet-Draft</keyword>
     <abstract>
       <t>
-	This document deprecates Resource Records that are neither
-	being used for anything meanigful nor already made obsolete by
-	other RFCs.  This document updates <xref target="RFC1035"/>.
+	This document deprecates Resource Records (RR) Types that are
+	either not being used for anything meaningful or were been
+	already made obsolete by other RFCs.  This document updates
+	<xref target="RFC1035"/>, <xref target="RFC1035"/>, <xref
+	target="RFC4034"/>.
       </t>
     </abstract>
   </front>
@@ -46,22 +50,35 @@
     <section anchor="introduction" title="Introduction">
       <t>
 	The <xref target="RFC1035"/> defines couple of old resource
-	records that are not being used, and they are causing
+	records that are not being used, and they are either causing
 	operational problems between implementations that support them
-	and that don't supported them due DNS compression on the wire.
-	This document deprecates such records to allow the
+	and that don't supported them due DNS compression on the wire,
+	or they are not in use and should have been obsoleted years
+	ago.  This document deprecates such records to allow the
 	implementations to drop the specific support for such records.
       </t>
     </section>
 
-    <section title="Deprecating MB, MG, MF, MINFO and WKS Resource Records">
+    <section title="Deprecating MB, MG, MF, MINFO and WKS RR Types">
       <t>
-	The MB, MG, MF, MINFO, and WKS Resource Records aren't used in
-	any existing standards, and this documents deprecates the
-	usage.  The DNS implementations compliant with this document
-	MUST NOT implement MB, MG, MF, WKS, and MINFO Resource Records
-	and treat them as a generic type effectively disabling the
-	compression in those types.
+	The MB, MG, MF, MINFO, and WKS RR Types aren't used in any
+	existing standards, and this documents deprecates the usage.
+	The MB, MG, MF, and MINFO RR Types contain a domain name that
+	could be compressed in the RDATA section.  The DNS
+	implementations compliant with this document MUST NOT
+	implement MB, MG, MF, WKS, and MINFO RR Types and treat them
+	as a unknown DNS Resource RR Types (<xref target="RFC3597"/>),
+	effectively disabling the message compression inside the RDATA
+	of aforementioned RRTYPEs.
+      </t>
+
+      <t>
+	As an update to <xref target="RFC3596"/> and <xref
+	target="RFC4034"/> this document specifies that for MB, MG,
+	MF, MINFO, and WKS RR types, the canonical form is such that
+	no downcasing of embedded domain names takes place, and
+	otherwise identical to the canonical form specified in <sr3f
+	target="RFC4035"/> section 6.2.
       </t>
     </section>
 
@@ -86,12 +103,12 @@
 
     <section anchor="operation" title="Operational Considerations">
       <t>
-	The various status of implementation of MB, MG, MR, MINFO, and
+	The various state of implementation of MB, MG, MR, MINFO, and
 	WKS records is already causing operational problems between
 	DNS implementations that do implement aforementioned types and
-	those who don't because of mandatory DNS compression on the
-	wire.  This document aims to rectify the situation by removing
-	the support for all the DNS implementations.  This should not
+	those who don't because of the DNS compression on the wire.
+	This document aims to rectify the situation by removing the
+	support for all these RR types the DNS implementations.  This should not
 	cause any operational problems because the records aren't
 	actually in use on the Internet. [COMMENT: Some data?]
       </t>
@@ -109,6 +126,8 @@
   <back>
     <references title="Normative References">
       &RFC1035;
+      &RFC3597;
+      &RFC4034;
     </references>
     <references title="Informative References">
       <reference anchor="DNS-IANA" target="https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml">
