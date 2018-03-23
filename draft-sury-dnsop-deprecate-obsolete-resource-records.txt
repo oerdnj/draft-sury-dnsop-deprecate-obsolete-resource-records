@@ -10,7 +10,7 @@ Expires: September 24, 2018
 
 
                Deprecating obsolete DNS Resource Records
-                  draft-ietf-dnsop-algorithm-update-00
+             draft-sury-deprecate-obsolete-resource-records
 
 Abstract
 
@@ -61,7 +61,7 @@ Internet-Draft        Deprecating old mail RRTYPES            March 2018
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  Deprecating MB, MG, MF and MINFO Resource Records . . . . . .   2
+   2.  Deprecating MB, MG, MF, MINFO and WKS Resource Records  . . .   2
    3.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   2
    4.  Security Considerations . . . . . . . . . . . . . . . . . . .   3
    5.  Operational Considerations  . . . . . . . . . . . . . . . . .   3
@@ -69,7 +69,7 @@ Table of Contents
    7.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   3
      7.1.  Normative References  . . . . . . . . . . . . . . . . . .   3
      7.2.  Informative References  . . . . . . . . . . . . . . . . .   3
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   3
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   4
 
 1.  Introduction
 
@@ -80,18 +80,39 @@ Table of Contents
    to allow the implementations to drop the specific support for such
    records.
 
-2.  Deprecating MB, MG, MF and MINFO Resource Records
+2.  Deprecating MB, MG, MF, MINFO and WKS Resource Records
 
-   The MB, MG, MF and MINFO Resource Records aren't used in any existing
-   standards, and this documents deprecates the usage.  The DNS
+   The MB, MG, MF, MINFO, and WKS Resource Records aren't used in any
+   existing standards, and this documents deprecates the usage.  The DNS
    implementations compliant with this document MUST NOT implement MB,
-   MG, MF and MINFO Resource Records and treat them as a generic type
-   effectively disabling the compression in those types.
+   MG, MF, WKS, and MINFO Resource Records and treat them as a generic
+   type effectively disabling the compression in those types.
 
 3.  IANA Considerations
 
    This documents updates the IANA registry "Domain Name System (DNS)
    Parameters" ([DNS-IANA]).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sury                   Expires September 24, 2018               [Page 2]
+
+Internet-Draft        Deprecating old mail RRTYPES            March 2018
+
 
    +-------+-------+-------------------------------------+-------------+
    | TYPE  | Value | Meaning                             | Reference   |
@@ -102,17 +123,11 @@ Table of Contents
    |       |       |                                     | document    |
    | MR    | 9     | a mail rename domain name           | This        |
    |       |       | (OBSOLETE)                          | document    |
+   | WKS   | 11    | a well known service description    | This        |
+   |       |       | (OBSOLETE)                          | document    |
    | MINFO | 14    | mailbox or mail list information    | This        |
    |       |       | (OBSOLETE)                          | document    |
    +-------+-------+-------------------------------------+-------------+
-
-
-
-
-Sury                   Expires September 24, 2018               [Page 2]
-
-Internet-Draft        Deprecating old mail RRTYPES            March 2018
-
 
 4.  Security Considerations
 
@@ -120,18 +135,19 @@ Internet-Draft        Deprecating old mail RRTYPES            March 2018
 
 5.  Operational Considerations
 
-   The various status of implementation of MB, MG, MR and MINFO records
-   is already causing operational problems between DNS implementations
-   that do implement aforementioned types and those who don't because of
-   mandatory DNS compression on the wire.  This document aims to rectify
-   the situation by removing the support for all the DNS
-   implementations.  This should not cause any operational problems
-   because the records aren't actually in use on the Internet.
+   The various status of implementation of MB, MG, MR, MINFO, and WKS
+   records is already causing operational problems between DNS
+   implementations that do implement aforementioned types and those who
+   don't because of mandatory DNS compression on the wire.  This
+   document aims to rectify the situation by removing the support for
+   all the DNS implementations.  This should not cause any operational
+   problems because the records aren't actually in use on the Internet.
    [COMMENT: Some data?]
 
 6.  Acknowledgements
 
-   Peter van Dijk for poking me to write the draft.
+   Peter van Dijk for poking me to write the draft.  Daniel Salzman for
+   reviewing the document.
 
 7.  References
 
@@ -142,6 +158,17 @@ Internet-Draft        Deprecating old mail RRTYPES            March 2018
               November 1987, <https://www.rfc-editor.org/info/rfc1035>.
 
 7.2.  Informative References
+
+
+
+
+
+
+
+Sury                   Expires September 24, 2018               [Page 3]
+
+Internet-Draft        Deprecating old mail RRTYPES            March 2018
+
 
    [DNS-IANA]
               "Domain Name System (DNS) Parameters",
@@ -165,4 +192,33 @@ Author's Address
 
 
 
-Sury                   Expires September 24, 2018               [Page 3]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sury                   Expires September 24, 2018               [Page 4]
