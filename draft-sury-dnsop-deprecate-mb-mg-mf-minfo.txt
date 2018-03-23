@@ -93,18 +93,18 @@ Table of Contents
    This documents updates the IANA registry "Domain Name System (DNS)
    Parameters" ([DNS-IANA]).
 
-   +------+-------+--------------------------------------+-------------+
-   | TYPE | Value | Meaning                              | Reference   |
-   +------+-------+--------------------------------------+-------------+
-   | MB   | 7     | a mailbox domain name (OBSOLETE)     | This        |
-   |      |       |                                      | document    |
-   | MG   | 8     | a mail group member (OBSOLETE)       | This        |
-   |      |       |                                      | document    |
-   | MR   | 9     | a mail rename domain name (OBSOLETE) | This        |
-   |      |       |                                      | document    |
-   | MR   | 14    | mailbox or mail list information     | This        |
-   |      |       | (OBSOLETE)                           | document    |
-   +------+-------+--------------------------------------+-------------+
+   +-------+-------+-------------------------------------+-------------+
+   | TYPE  | Value | Meaning                             | Reference   |
+   +-------+-------+-------------------------------------+-------------+
+   | MB    | 7     | a mailbox domain name (OBSOLETE)    | This        |
+   |       |       |                                     | document    |
+   | MG    | 8     | a mail group member (OBSOLETE)      | This        |
+   |       |       |                                     | document    |
+   | MR    | 9     | a mail rename domain name           | This        |
+   |       |       | (OBSOLETE)                          | document    |
+   | MINFO | 14    | mailbox or mail list information    | This        |
+   |       |       | (OBSOLETE)                          | document    |
+   +-------+-------+-------------------------------------+-------------+
 
 
 

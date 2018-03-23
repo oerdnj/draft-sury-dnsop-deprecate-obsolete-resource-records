@@ -73,7 +73,7 @@
 	<c>MB</c>               <c>7</c>                  <c>a mailbox domain name (OBSOLETE)</c> <c>This document</c>
 	<c>MG</c>               <c>8</c>                  <c>a mail group member (OBSOLETE)</c> <c>This document</c>
 	<c>MR</c>               <c>9</c>                  <c>a mail rename domain name (OBSOLETE)</c> <c>This document</c>
-	<c>MR</c>               <c>14</c>                 <c>mailbox or mail list information (OBSOLETE)</c> <c>This document</c>
+	<c>MINFO</c>            <c>14</c>                 <c>mailbox or mail list information (OBSOLETE)</c> <c>This document</c>
       </texttable>
     </section>
 
