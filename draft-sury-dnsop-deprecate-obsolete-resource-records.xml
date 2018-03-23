@@ -15,7 +15,7 @@
 <?rfc sortrefs="no" ?>
 <?rfc rfcedstyle="yes"?>
 
-<rfc ipr="trust200902" docName="draft-ietf-dnsop-algorithm-update-00" category="std" updates="1035">
+<rfc ipr="trust200902" docName="draft-sury-deprecate-obsolete-resource-records" category="std" updates="1035">
   <front>
     <title abbrev="Deprecating old mail RRTYPES">Deprecating obsolete DNS Resource Records</title>
     <author fullname="Ondrej Sury" initials="O." surname="Sury">
@@ -54,14 +54,14 @@
       </t>
     </section>
 
-    <section title="Deprecating MB, MG, MF and MINFO Resource Records">
+    <section title="Deprecating MB, MG, MF, MINFO and WKS Resource Records">
       <t>
-	The MB, MG, MF and MINFO Resource Records aren't used in any
-	existing standards, and this documents deprecates the usage.
-	The DNS implementations compliant with this document MUST NOT
-	implement MB, MG, MF and MINFO Resource Records and treat them
-	as a generic type effectively disabling the compression in
-	those types.
+	The MB, MG, MF, MINFO, and WKS Resource Records aren't used in
+	any existing standards, and this documents deprecates the
+	usage.  The DNS implementations compliant with this document
+	MUST NOT implement MB, MG, MF, WKS, and MINFO Resource Records
+	and treat them as a generic type effectively disabling the
+	compression in those types.
       </t>
     </section>
 
@@ -73,6 +73,7 @@
 	<c>MB</c>               <c>7</c>                  <c>a mailbox domain name (OBSOLETE)</c> <c>This document</c>
 	<c>MG</c>               <c>8</c>                  <c>a mail group member (OBSOLETE)</c> <c>This document</c>
 	<c>MR</c>               <c>9</c>                  <c>a mail rename domain name (OBSOLETE)</c> <c>This document</c>
+	<c>WKS</c>              <c>11</c>                 <c>a well known service description (OBSOLETE)</c> <c>This document</c>
 	<c>MINFO</c>            <c>14</c>                 <c>mailbox or mail list information (OBSOLETE)</c> <c>This document</c>
       </texttable>
     </section>
@@ -85,9 +86,9 @@
 
     <section anchor="operation" title="Operational Considerations">
       <t>
-	The various status of implementation of MB, MG, MR and MINFO
-	records is already causing operational problems between DNS
-	implementations that do implement aforementioned types and
+	The various status of implementation of MB, MG, MR, MINFO, and
+	WKS records is already causing operational problems between
+	DNS implementations that do implement aforementioned types and
 	those who don't because of mandatory DNS compression on the
 	wire.  This document aims to rectify the situation by removing
 	the support for all the DNS implementations.  This should not
@@ -98,7 +99,8 @@
 
     <section anchor="ack" title="Acknowledgements">
       <t>
-	Peter van Dijk for poking me to write the draft.
+	Peter van Dijk for poking me to write the draft.  Daniel
+	Salzman for reviewing the document.
       </t>
     </section>
 
