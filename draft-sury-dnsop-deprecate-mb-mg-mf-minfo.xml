@@ -15,9 +15,9 @@
 <?rfc sortrefs="no" ?>
 <?rfc rfcedstyle="yes"?>
 
-<rfc ipr="trust200902" docName="draft-ietf-dnsop-algorithm-update-00" category="std">
+<rfc ipr="trust200902" docName="draft-ietf-dnsop-algorithm-update-00" category="std" updates="1035">
   <front>
-    <title abbrev="Deprecating old mail RRTYPES">Deprecating MB, MG, MF and MINFO Resource Records</title>
+    <title abbrev="Deprecating old mail RRTYPES">Deprecating obsolete DNS Resource Records</title>
     <author fullname="Ondrej Sury" initials="O." surname="Sury">
       <organization>Internet Systems Consortium</organization>
       <address>
@@ -34,8 +34,9 @@
     <keyword>Internet-Draft</keyword>
     <abstract>
       <t>
-	This document deprecates MB, MG, MF and MINFO Resource
-	Records.  This document obsoletes <xref target="RFC1035"/>.
+	This document deprecates Resource Records that are neither
+	being used for anything meanigful nor already made obsolete by
+	other RFCs.  This document updates <xref target="RFC1035"/>.
       </t>
     </abstract>
   </front>
@@ -52,6 +53,7 @@
 	implementations to drop the specific support for such records.
       </t>
     </section>
+
     <section title="Deprecating MB, MG, MF and MINFO Resource Records">
       <t>
 	The MB, MG, MF and MINFO Resource Records aren't used in any
@@ -61,22 +63,21 @@
 	as a generic type effectively disabling the compression in
 	those types.
       </t>
-      </section>
+    </section>
 
-      <section anchor="iana" title="IANA Considerations">
-	<t>This documents updates the IANA registry "Domain Name System (DNS) Parameters" (<xref target="DNS-IANA"/>).</t>
+    <section anchor="iana" title="IANA Considerations">
+      <t>This documents updates the IANA registry "Domain Name System (DNS) Parameters" (<xref target="DNS-IANA"/>).</t>
 	
-	<texttable>
-          <ttcol>TYPE</ttcol>     <ttcol>Value</ttcol>      <ttcol>Meaning</ttcol>      <ttcol>Reference</ttcol>
-	  <c>MB</c>               <c>7</c>                  <c>a mailbox domain name (OBSOLETE)</c> <c>This document</c>
-	  <c>MG</c>               <c>8</c>                  <c>a mail group member (OBSOLETE)</c> <c>This document</c>
-	  <c>MR</c>               <c>9</c>                  <c>a mail rename domain name (OBSOLETE)</c> <c>This document</c>
-	  <c>MR</c>               <c>14</c>                 <c>mailbox or mail list information (OBSOLETE)</c> <c>This document</c>
-	</texttable>
-      </section>
+      <texttable>
+        <ttcol>TYPE</ttcol>     <ttcol>Value</ttcol>      <ttcol>Meaning</ttcol>      <ttcol>Reference</ttcol>
+	<c>MB</c>               <c>7</c>                  <c>a mailbox domain name (OBSOLETE)</c> <c>This document</c>
+	<c>MG</c>               <c>8</c>                  <c>a mail group member (OBSOLETE)</c> <c>This document</c>
+	<c>MR</c>               <c>9</c>                  <c>a mail rename domain name (OBSOLETE)</c> <c>This document</c>
+	<c>MR</c>               <c>14</c>                 <c>mailbox or mail list information (OBSOLETE)</c> <c>This document</c>
+      </texttable>
+    </section>
 
     <section anchor="security" title="Security Considerations">
-
       <t>
 	This document has not security considerations.
       </t>
