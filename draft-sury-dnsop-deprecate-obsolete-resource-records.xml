@@ -101,33 +101,40 @@
 	  types:
 	  <list style="numbers">
 	    <t>
-	      auth servers SHOULD log a warning when loading zones that
-	      contain obsolete/deprecated rrtypes.
+	      Authoritative DNS Servers SHOULD issue a warning when
+	      loading zones that contain DEPRECATED RR Types;
 	    </t>
 
 	    <t>
-	      responders SHOULD NOT compress rdata when rendering
-	      obsolete/deprecated type records to wire format.
+	      DNS Servers MUST NOT compress RDATA when rendering
+	      DEPRECATED RR Types to wire format;
 	    </t>
 
 	    <t>
-	      queriers which receive obsolete/deprecated type records
-	      MAY interpret them as unknown type records (<xref
+	      Recursive DNS Servers MAY support legacy compression in
+	      DEPRECATED RR Types for received data for backward
+	      compatibility if desired, but SHOULD warn if such
+	      information is received.  Compressed RDATA in DEPRECATED
+	      RR Types MUST be uncompressed before sending and they
+	      MUST NOT be re-transmitted;
+	    </t>
+	    
+	    <t>
+	      DNS Clients which receive DEPRECATED RR Types MAY
+	      interpret them as unknown RR types (<xref
 	      target="RFC3597"/>), and MUST NOT interfere with their
-	      transmission.
+	      transmission;
+	    </t>
+	    
+	    <t>
+	      DNSSEC Validators and Signers SHOULD treat RDATA for
+	      DEPRECATED RR Types as opaque with respect to canonical
+	      RR ordering and deduplication;
 	    </t>
 
 	    <t>
-	      note that the choice to parse obsolete/deprecated MAY be
-	      contingent on whether the rdata is compressed: an obsolete
-	      type record MAY be parsed as a known type if its rdata is
-	      uncompressed, but as an unknown type otherwise.
-	    </t>
-
-	    <t>
-	      validators and signers SHOULD treat rdata for
-	      obsolete/deprecated types as opaque with respect to
-	      canonical RR ordering and deduplication
+	      DEPRECATED RR Types MUST never be treated as a
+	      known-type with respect to the wire protocol.
 	    </t>
 	  </list>
       </t>
@@ -155,8 +162,8 @@
     <section anchor="ack" title="Acknowledgements">
       <t>
 	Peter van Dijk for poking me to write the draft.  Daniel
-	Salzman for reviewing the document.  Evan Hunt to write first
-	version of the section on Implementation Considerations.
+	Salzman for reviewing the document.  Evan Hunt and Michael
+	Casadevall to write Implementation Considerations section.
       </t>
     </section>
 

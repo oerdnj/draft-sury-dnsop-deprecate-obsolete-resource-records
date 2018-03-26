@@ -66,7 +66,7 @@ Table of Contents
    3.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   2
    4.  Implementation Considerations . . . . . . . . . . . . . . . .   3
    5.  Security Considerations . . . . . . . . . . . . . . . . . . .   3
-   6.  Operational Considerations  . . . . . . . . . . . . . . . . .   3
+   6.  Operational Considerations  . . . . . . . . . . . . . . . . .   4
    7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   4
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   4
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .   4
@@ -131,28 +131,44 @@ Internet-Draft        Deprecating old mail RRTYPES            March 2018
    and the following guidance is given to DNS implementors in the
    handling of obsolete/deprecated RR types:
 
-   1.  auth servers SHOULD log a warning when loading zones that contain
-       obsolete/deprecated rrtypes.
+   1.  Authoritative DNS Servers SHOULD issue a warning when loading
+       zones that contain DEPRECATED RR Types;
 
-   2.  responders SHOULD NOT compress rdata when rendering obsolete/
-       deprecated type records to wire format.
+   2.  DNS Servers MUST NOT compress RDATA when rendering DEPRECATED RR
+       Types to wire format;
 
-   3.  queriers which receive obsolete/deprecated type records MAY
-       interpret them as unknown type records ([RFC3597]), and MUST NOT
-       interfere with their transmission.
+   3.  Recursive DNS Servers MAY support legacy compression in
+       DEPRECATED RR Types for received data for backward compatibility
+       if desired, but SHOULD warn if such information is received.
+       Compressed RDATA in DEPRECATED RR Types MUST be uncompressed
+       before sending and they MUST NOT be re-transmitted;
 
-   4.  note that the choice to parse obsolete/deprecated MAY be
-       contingent on whether the rdata is compressed: an obsolete type
-       record MAY be parsed as a known type if its rdata is
-       uncompressed, but as an unknown type otherwise.
+   4.  DNS Clients which receive DEPRECATED RR Types MAY interpret them
+       as unknown RR types ([RFC3597]), and MUST NOT interfere with
+       their transmission;
 
-   5.  validators and signers SHOULD treat rdata for obsolete/deprecated
-       types as opaque with respect to canonical RR ordering and
-       deduplication
+   5.  DNSSEC Validators and Signers SHOULD treat RDATA for DEPRECATED
+       RR Types as opaque with respect to canonical RR ordering and
+       deduplication;
+
+   6.  DEPRECATED RR Types MUST never be treated as a known-type with
+       respect to the wire protocol.
 
 5.  Security Considerations
 
    This document has not security considerations.
+
+
+
+
+
+
+
+
+Sury                   Expires September 27, 2018               [Page 3]
+
+Internet-Draft        Deprecating old mail RRTYPES            March 2018
+
 
 6.  Operational Considerations
 
@@ -162,21 +178,14 @@ Internet-Draft        Deprecating old mail RRTYPES            March 2018
    don't because of the DNS compression on the wire.  This document aims
    to rectify the situation by removing the support for all these RR
    types the DNS implementations.  This should not cause any operational
-
-
-
-Sury                   Expires September 27, 2018               [Page 3]
-
-Internet-Draft        Deprecating old mail RRTYPES            March 2018
-
-
    problems because the records aren't actually in use on the Internet.
    [COMMENT: Some data?]
 
 7.  Acknowledgements
 
    Peter van Dijk for poking me to write the draft.  Daniel Salzman for
-   reviewing the document.
+   reviewing the document.  Evan Hunt and Michael Casadevall to write
+   Implementation Considerations section.
 
 8.  References
 
@@ -209,15 +218,6 @@ Author's Address
    CZ
 
    EMail: ondrej@isc.org
-
-
-
-
-
-
-
-
-
 
 
 
