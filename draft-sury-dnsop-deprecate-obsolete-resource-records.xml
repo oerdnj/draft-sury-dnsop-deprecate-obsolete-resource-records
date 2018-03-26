@@ -49,36 +49,33 @@
 
     <section anchor="introduction" title="Introduction">
       <t>
-	The <xref target="RFC1035"/> defines couple of old resource
-	records that are not being used, and they are either causing
-	operational problems between implementations that support them
-	and that don't supported them due DNS compression on the wire,
-	or they are not in use and should have been obsoleted years
-	ago.  This document deprecates such records to allow the
-	implementations to drop the specific support for such records.
+	The <xref target="RFC1035"/> defines couple of old Resource
+	Record (RR) Types that are not being used, and they are not in
+	use and should have been obsoleted years ago.
+	Some of these RR Types are even causing operational problems
+	between implementations that support them and that don't
+	supported them due DNS compression on the wire, or .  This
+	document deprecates such records to allow the implementations
+	to drop the specific support for such records.
       </t>
     </section>
 
-    <section title="Deprecating MB, MG, MF, MINFO and WKS RR Types">
+    <section title="Deprecating MD, MF, MB, MG, MR, MINFO, MAILA, and MAILBRR Types">
       <t>
-	The MB, MG, MF, MINFO, and WKS RR Types aren't used in any
-	existing standards, and this documents deprecates the usage.
-	The MB, MG, MF, and MINFO RR Types contain a domain name that
-	could be compressed in the RDATA section.  The DNS
-	implementations compliant with this document MUST NOT
-	implement MB, MG, MF, WKS, and MINFO RR Types and treat them
-	as a unknown DNS Resource RR Types (<xref target="RFC3597"/>),
-	effectively disabling the message compression inside the RDATA
-	of aforementioned RRTYPEs.
+	The MD, MF, MB, MG, MR, MINFO, MAILA, and MAILB RR Types
+	aren't used in any existing standards, and this documents
+	deprecates the usage.  The MD, MF, MB, MG, MR, and MINFO RR
+	Types RDATA contain a domain name that could be compressed in
+	the RDATA section.
       </t>
 
       <t>
-	As an update to <xref target="RFC3596"/> and <xref
-	target="RFC4034"/> this document specifies that for MB, MG,
-	MF, MINFO, and WKS RR types, the canonical form is such that
-	no downcasing of embedded domain names takes place, and
-	otherwise identical to the canonical form specified in <sr3f
-	target="RFC4035"/> section 6.2.
+	As an update to <xref target="RFC3597"/> and <xref
+	target="RFC4034"/> this document specifies that for MD, MF,
+	MB, MG, MR, and MINFO RR types, the canonical form is such
+	that no downcasing of embedded domain names takes place, and
+	otherwise identical to the canonical form specified in <xref
+	target="RFC4034"/> section 6.2.
       </t>
     </section>
 
@@ -87,14 +84,55 @@
 	
       <texttable>
         <ttcol>TYPE</ttcol>     <ttcol>Value</ttcol>      <ttcol>Meaning</ttcol>      <ttcol>Reference</ttcol>
-	<c>MB</c>               <c>7</c>                  <c>a mailbox domain name (OBSOLETE)</c> <c>This document</c>
-	<c>MG</c>               <c>8</c>                  <c>a mail group member (OBSOLETE)</c> <c>This document</c>
-	<c>MR</c>               <c>9</c>                  <c>a mail rename domain name (OBSOLETE)</c> <c>This document</c>
-	<c>WKS</c>              <c>11</c>                 <c>a well known service description (OBSOLETE)</c> <c>This document</c>
-	<c>MINFO</c>            <c>14</c>                 <c>mailbox or mail list information (OBSOLETE)</c> <c>This document</c>
+	<c>MD</c>               <c>3</c>                  <c>DEPRECATED</c> <c>This document</c>
+	<c>MF</c>               <c>4</c>                  <c>DEPRECATED</c> <c>This document</c>
+	<c>MB</c>               <c>7</c>                  <c>DEPRECATED</c> <c>This document</c>
+	<c>MG</c>               <c>8</c>                  <c>DEPRECATED</c> <c>This document</c>
+	<c>MR</c>               <c>9</c>                  <c>DEPRECATED</c> <c>This document</c>
+	<c>MINFO</c>            <c>14</c>                 <c>DEPRECATED</c> <c>This document</c>
       </texttable>
     </section>
 
+    <section anchor="implementation" title="Implementation Considerations">
+      <t>
+	  Types will be flagged as obsolete/deprecated in the IANA
+	  registry, and the following guidance is given to DNS
+	  implementors in the handling of obsolete/deprecated RR
+	  types:
+	  <list style="numbers">
+	    <t>
+	      auth servers SHOULD log a warning when loading zones that
+	      contain obsolete/deprecated rrtypes.
+	    </t>
+
+	    <t>
+	      responders SHOULD NOT compress rdata when rendering
+	      obsolete/deprecated type records to wire format.
+	    </t>
+
+	    <t>
+	      queriers which receive obsolete/deprecated type records
+	      MAY interpret them as unknown type records (<xref
+	      target="RFC3597"/>), and MUST NOT interfere with their
+	      transmission.
+	    </t>
+
+	    <t>
+	      note that the choice to parse obsolete/deprecated MAY be
+	      contingent on whether the rdata is compressed: an obsolete
+	      type record MAY be parsed as a known type if its rdata is
+	      uncompressed, but as an unknown type otherwise.
+	    </t>
+
+	    <t>
+	      validators and signers SHOULD treat rdata for
+	      obsolete/deprecated types as opaque with respect to
+	      canonical RR ordering and deduplication
+	    </t>
+	  </list>
+      </t>
+    </section>
+    
     <section anchor="security" title="Security Considerations">
       <t>
 	This document has not security considerations.
@@ -117,7 +155,8 @@
     <section anchor="ack" title="Acknowledgements">
       <t>
 	Peter van Dijk for poking me to write the draft.  Daniel
-	Salzman for reviewing the document.
+	Salzman for reviewing the document.  Evan Hunt to write first
+	version of the section on Implementation Considerations.
       </t>
     </section>
 
