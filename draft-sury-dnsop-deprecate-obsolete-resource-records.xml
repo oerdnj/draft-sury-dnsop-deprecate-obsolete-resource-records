@@ -49,14 +49,19 @@
 
     <section anchor="introduction" title="Introduction">
       <t>
-	The <xref target="RFC1035"/> defines couple of old Resource
-	Record (RR) Types that are not being used, and they are not in
-	use and should have been obsoleted years ago.
-	Some of these RR Types are even causing operational problems
-	between implementations that support them and that don't
-	supported them due DNS compression on the wire, or .  This
-	document deprecates such records to allow the implementations
-	to drop the specific support for such records.
+	<xref target="RFC1035"/> and other documents have defined some
+	Resource Record (RR) Types that are no longer in common use,
+	some of which have been rendered obsolete by subsequent standards,
+	but have never been clearly deprecated in the context of the DNS.
+	In some cases there have been interoperability problems between
+	DNS implementations that support these types and those that do
+	not - for example, because of DNS name compression in the
+	wire format. Continued support for these RR Types imposes a
+	complexity cost on new implementations for little benefit.
+      </t>
+      <t>
+	This document formally deprecates such RR Types, allowing
+	implementations to drop specific support for them.
       </t>
     </section>
 
@@ -64,7 +69,7 @@
       <t>
 	The MD, MF, MB, MG, MR, MINFO, MAILA, and MAILB RR Types
 	aren't used in any existing standards, and this documents
-	deprecates the usage.  The MD, MF, MB, MG, MR, and MINFO RR
+	deprecates their usage.  The MD, MF, MB, MG, MR, and MINFO RR
 	Types RDATA contain a domain name that could be compressed in
 	the RDATA section.
       </t>
@@ -74,7 +79,7 @@
 	target="RFC4034"/> this document specifies that for MD, MF,
 	MB, MG, MR, and MINFO RR types, the canonical form is such
 	that no downcasing of embedded domain names takes place, and
-	otherwise identical to the canonical form specified in <xref
+	is otherwise identical to the canonical form specified in <xref
 	target="RFC4034"/> section 6.2.
       </t>
     </section>
@@ -142,20 +147,20 @@
     
     <section anchor="security" title="Security Considerations">
       <t>
-	This document has not security considerations.
+	This document has no security considerations.
       </t>
     </section>
 
     <section anchor="operation" title="Operational Considerations">
       <t>
-	The various state of implementation of MB, MG, MR, MINFO, and
-	WKS records is already causing operational problems between
-	DNS implementations that do implement aforementioned types and
-	those who don't because of the DNS compression on the wire.
-	This document aims to rectify the situation by removing the
-	support for all these RR types the DNS implementations.  This should not
-	cause any operational problems because the records aren't
-	actually in use on the Internet. [COMMENT: Some data?]
+	The varying states of implementation of MD, MF, MB, MG,
+	MR, and MINFO RR Types has already caused operational problems
+	between DNS implementations that do implement the aforementioned
+	types and those that don't because of DNS compression on the wire.
+	This document aims to rectify the situation by encouraging removal
+	of support for all these RR types in DNS implementations.  This
+	should not cause signficant operational problems because these
+	records are not in wide use on the Internet. [COMMENT: Some data?]
       </t>
     </section>
 
