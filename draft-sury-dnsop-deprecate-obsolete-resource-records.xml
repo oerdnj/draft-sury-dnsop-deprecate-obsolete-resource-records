@@ -30,15 +30,15 @@
         <email>ondrej@isc.org</email>
       </address>
     </author>
-    <date year="2018"/>
+    <date year="2020"/>
     <area>Ops</area>
     <workgroup>dnsop</workgroup>
     <keyword>Internet-Draft</keyword>
     <abstract>
       <t>
 	This document deprecates Resource Records (RR) Types that are
-	either not being used for anything meaningful or were been
-	already made obsolete by other RFCs.  This document updates
+	either not being used for anything meaningful or have already
+	been rendered obsolete by other RFCs.  This document updates
 	<xref target="RFC1035"/>, <xref target="RFC1035"/>, <xref
 	target="RFC4034"/>.
       </t>
@@ -49,7 +49,7 @@
 
     <section anchor="introduction" title="Introduction">
       <t>
-	<xref target="RFC1035"/> and other documents have defined some
+	<xref target="RFC1035"/> and other documents defined some
 	Resource Record (RR) Types that are no longer in common use,
 	some of which have been rendered obsolete by subsequent standards,
 	but have never been clearly deprecated in the context of the DNS.
@@ -60,27 +60,31 @@
 	complexity cost on new implementations for little benefit.
       </t>
       <t>
-	This document formally deprecates such RR Types, allowing
+	This document formally deprecates these RR Types, allowing
 	implementations to drop specific support for them.
       </t>
     </section>
 
-    <section title="Deprecating MD, MF, MB, MG, MR, MINFO, MAILA, and MAILBRR Types">
+    <section title="Deprecating MD, MF, MB, MG, MR, MINFO, MAILA, and MAILB RR Types">
       <t>
 	The MD, MF, MB, MG, MR, MINFO, MAILA, and MAILB RR Types
-	aren't used in any existing standards, and this documents
-	deprecates their usage.  The MD, MF, MB, MG, MR, and MINFO RR
-	Types RDATA contain a domain name that could be compressed in
-	the RDATA section.
+	are not used in any existing standards, and this document
+	deprecates their usage.
       </t>
 
       <t>
-	As an update to <xref target="RFC3597"/> and <xref
-	target="RFC4034"/> this document specifies that for MD, MF,
-	MB, MG, MR, and MINFO RR types, the canonical form is such
-	that no downcasing of embedded domain names takes place, and
-	is otherwise identical to the canonical form specified in <xref
-	target="RFC4034"/> section 6.2.
+	RDATA fields for MD, MF, MB, MG, MR, and MINFO RR Types
+	contain domain names.  DNS compression MUST NOT be applied
+	to these domain names when sending.
+      </t>
+
+      <t>
+	As an update to <xref target="RFC3597"/> and
+	<xref target="RFC4034"/>, this document updates the specifications
+	of the canonical forms for the MD, MF, MB, MG, MR, and MINFO
+	RR Types such that they do NOT include downcasing of embedded
+	domain names. Canonical forms otherwise remain as specified
+	in <xref target="RFC4034"/> section 6.2.
       </t>
     </section>
 
@@ -95,6 +99,8 @@
 	<c>MG</c>               <c>8</c>                  <c>DEPRECATED</c> <c>This document</c>
 	<c>MR</c>               <c>9</c>                  <c>DEPRECATED</c> <c>This document</c>
 	<c>MINFO</c>            <c>14</c>                 <c>DEPRECATED</c> <c>This document</c>
+	<c>MAILB</c>            <c>253</c>                <c>DEPRECATED</c> <c>This document</c>
+	<c>MAILA</c>            <c>254</c>                <c>DEPRECATED</c> <c>This document</c>
       </texttable>
     </section>
 
@@ -120,13 +126,13 @@
 	      DEPRECATED RR Types for received data for backward
 	      compatibility if desired, but SHOULD warn if such
 	      information is received.  Compressed RDATA in DEPRECATED
-	      RR Types MUST be uncompressed before sending and they
-	      MUST NOT be re-transmitted;
+	      RR Types MUST be uncompressed before sending, and
+	      MUST NOT be re-transmitted in compressed form;
 	    </t>
 	    
 	    <t>
 	      DNS Clients which receive DEPRECATED RR Types MAY
-	      interpret them as unknown RR types (<xref
+	      interpret them as unknown RR Types (<xref
 	      target="RFC3597"/>), and MUST NOT interfere with their
 	      transmission;
 	    </t>
@@ -135,11 +141,6 @@
 	      DNSSEC Validators and Signers SHOULD treat RDATA for
 	      DEPRECATED RR Types as opaque with respect to canonical
 	      RR ordering and deduplication;
-	    </t>
-
-	    <t>
-	      DEPRECATED RR Types MUST never be treated as a
-	      known-type with respect to the wire protocol.
 	    </t>
 	  </list>
       </t>
@@ -153,22 +154,23 @@
 
     <section anchor="operation" title="Operational Considerations">
       <t>
-	The varying states of implementation of MD, MF, MB, MG,
-	MR, and MINFO RR Types has already caused operational problems
-	between DNS implementations that do implement the aforementioned
-	types and those that don't because of DNS compression on the wire.
-	This document aims to rectify the situation by encouraging removal
-	of support for all these RR types in DNS implementations.  This
-	should not cause signficant operational problems because these
-	records are not in wide use on the Internet. [COMMENT: Some data?]
+	Varying states of implementation of MD, MF, MB, MG, MR, and
+	MINFO RR Types have already caused operational problems
+	between DNS implementations that do, and do not, implement them,
+	as a result of differing behavior with respect to DNS compression
+	on the wire.  This document aims to rectify the situation by
+	encouraging removal of support for all these RR types in DNS
+	implementations.  This should cause few if any operational
+	problems, because these types are not in use on the Internet.
+	[COMMENT: Some data?]
       </t>
     </section>
 
     <section anchor="ack" title="Acknowledgements">
       <t>
-	Peter van Dijk for poking me to write the draft.  Daniel
-	Salzman for reviewing the document.  Evan Hunt and Michael
-	Casadevall to write Implementation Considerations section.
+	Thanks to Peter van Dijk for prompting us to write the draft,
+	Daniel Salzman for reviewing, and Michael Casadevall for
+	contributions to the Implementation Considerations section.
       </t>
     </section>
 

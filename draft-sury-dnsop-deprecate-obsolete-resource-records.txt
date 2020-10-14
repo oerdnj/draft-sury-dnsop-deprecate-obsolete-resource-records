@@ -4,9 +4,9 @@
 
 dnsop                                                            O. Sury
 Internet-Draft                               Internet Systems Consortium
-Updates: 1035,3597,4035 (if approved)                     March 26, 2018
+Updates: 1035,3597,4035 (if approved)                   October 14, 2020
 Intended status: Standards Track
-Expires: September 27, 2018
+Expires: April 17, 2021
 
 
             Deprecating obsolete DNS Resource Records Types
@@ -15,7 +15,7 @@ Expires: September 27, 2018
 Abstract
 
    This document deprecates Resource Records (RR) Types that are either
-   not being used for anything meaningful or were been already made
+   not being used for anything meaningful or have already been rendered
    obsolete by other RFCs.  This document updates [RFC1035], [RFC1035],
    [RFC4034].
 
@@ -34,11 +34,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 27, 2018.
+   This Internet-Draft will expire on April 17, 2021.
 
 Copyright Notice
 
-   Copyright (c) 2018 IETF Trust and the persons identified as the
+   Copyright (c) 2020 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -53,66 +53,71 @@ Copyright Notice
 
 
 
-Sury                   Expires September 27, 2018               [Page 1]
+Sury                     Expires April 17, 2021                 [Page 1]
 
-Internet-Draft        Deprecating old mail RRTYPES            March 2018
+Internet-Draft        Deprecating old mail RRTYPES          October 2020
 
 
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  Deprecating MD, MF, MB, MG, MR, MINFO, MAILA, and MAILBRR
+   2.  Deprecating MD, MF, MB, MG, MR, MINFO, MAILA, and MAILB RR
        Types . . . . . . . . . . . . . . . . . . . . . . . . . . . .   2
-   3.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   2
+   3.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   3
    4.  Implementation Considerations . . . . . . . . . . . . . . . .   3
-   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   3
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   4
    6.  Operational Considerations  . . . . . . . . . . . . . . . . .   4
    7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   4
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   4
      8.1.  Normative References  . . . . . . . . . . . . . . . . . .   4
      8.2.  Informative References  . . . . . . . . . . . . . . . . .   4
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   4
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   5
 
 1.  Introduction
 
-   The [RFC1035] defines couple of old Resource Record (RR) Types that
-   are not being used, and they are not in use and should have been
-   obsoleted years ago.  Some of these RR Types are even causing
-   operational problems between implementations that support them and
-   that don't supported them due DNS compression on the wire, or .  This
-   document deprecates such records to allow the implementations to drop
-   the specific support for such records.
+   [RFC1035] and other documents defined some Resource Record (RR) Types
+   that are no longer in common use, some of which have been rendered
+   obsolete by subsequent standards, but have never been clearly
+   deprecated in the context of the DNS.  In some cases there have been
+   interoperability problems between DNS implementations that support
+   these types and those that do not - for example, because of DNS name
+   compression in the wire format.  Continued support for these RR Types
+   imposes a complexity cost on new implementations for little benefit.
 
-2.  Deprecating MD, MF, MB, MG, MR, MINFO, MAILA, and MAILBRR Types
+   This document formally deprecates these RR Types, allowing
+   implementations to drop specific support for them.
 
-   The MD, MF, MB, MG, MR, MINFO, MAILA, and MAILB RR Types aren't used
-   in any existing standards, and this documents deprecates the usage.
-   The MD, MF, MB, MG, MR, and MINFO RR Types RDATA contain a domain
-   name that could be compressed in the RDATA section.
+2.  Deprecating MD, MF, MB, MG, MR, MINFO, MAILA, and MAILB RR Types
 
-   As an update to [RFC3597] and [RFC4034] this document specifies that
-   for MD, MF, MB, MG, MR, and MINFO RR types, the canonical form is
-   such that no downcasing of embedded domain names takes place, and
-   otherwise identical to the canonical form specified in [RFC4034]
-   section 6.2.
+   The MD, MF, MB, MG, MR, MINFO, MAILA, and MAILB RR Types are not used
+   in any existing standards, and this document deprecates their usage.
+
+   RDATA fields for MD, MF, MB, MG, MR, and MINFO RR Types contain
+   domain names.  DNS compression MUST NOT be applied to these domain
+   names when sending.
+
+   As an update to [RFC3597] and [RFC4034], this document updates the
+   specifications of the canonical forms for the MD, MF, MB, MG, MR, and
+   MINFO RR Types such that they do NOT include downcasing of embedded
+   domain names.  Canonical forms otherwise remain as specified in
+   [RFC4034] section 6.2.
+
+
+
+
+
+
+
+
+Sury                     Expires April 17, 2021                 [Page 2]
+
+Internet-Draft        Deprecating old mail RRTYPES          October 2020
+
 
 3.  IANA Considerations
 
    This documents updates the IANA registry "Domain Name System (DNS)
    Parameters" ([DNS-IANA]).
-
-
-
-
-
-
-
-
-
-Sury                   Expires September 27, 2018               [Page 2]
-
-Internet-Draft        Deprecating old mail RRTYPES            March 2018
-
 
               +-------+-------+------------+---------------+
               | TYPE  | Value | Meaning    | Reference     |
@@ -123,6 +128,8 @@ Internet-Draft        Deprecating old mail RRTYPES            March 2018
               | MG    | 8     | DEPRECATED | This document |
               | MR    | 9     | DEPRECATED | This document |
               | MINFO | 14    | DEPRECATED | This document |
+              | MAILB | 253   | DEPRECATED | This document |
+              | MAILA | 254   | DEPRECATED | This document |
               +-------+-------+------------+---------------+
 
 4.  Implementation Considerations
@@ -141,51 +148,48 @@ Internet-Draft        Deprecating old mail RRTYPES            March 2018
        DEPRECATED RR Types for received data for backward compatibility
        if desired, but SHOULD warn if such information is received.
        Compressed RDATA in DEPRECATED RR Types MUST be uncompressed
-       before sending and they MUST NOT be re-transmitted;
+       before sending, and MUST NOT be re-transmitted in compressed
+       form;
 
    4.  DNS Clients which receive DEPRECATED RR Types MAY interpret them
-       as unknown RR types ([RFC3597]), and MUST NOT interfere with
+       as unknown RR Types ([RFC3597]), and MUST NOT interfere with
        their transmission;
 
    5.  DNSSEC Validators and Signers SHOULD treat RDATA for DEPRECATED
        RR Types as opaque with respect to canonical RR ordering and
        deduplication;
 
-   6.  DEPRECATED RR Types MUST never be treated as a known-type with
-       respect to the wire protocol.
+
+
+
+
+
+
+Sury                     Expires April 17, 2021                 [Page 3]
+
+Internet-Draft        Deprecating old mail RRTYPES          October 2020
+
 
 5.  Security Considerations
 
-   This document has not security considerations.
-
-
-
-
-
-
-
-
-Sury                   Expires September 27, 2018               [Page 3]
-
-Internet-Draft        Deprecating old mail RRTYPES            March 2018
-
+   This document has no security considerations.
 
 6.  Operational Considerations
 
-   The various state of implementation of MB, MG, MR, MINFO, and WKS
-   records is already causing operational problems between DNS
-   implementations that do implement aforementioned types and those who
-   don't because of the DNS compression on the wire.  This document aims
-   to rectify the situation by removing the support for all these RR
-   types the DNS implementations.  This should not cause any operational
-   problems because the records aren't actually in use on the Internet.
-   [COMMENT: Some data?]
+   Varying states of implementation of MD, MF, MB, MG, MR, and MINFO RR
+   Types have already caused operational problems between DNS
+   implementations that do, and do not, implement them, as a result of
+   differing behavior with respect to DNS compression on the wire.  This
+   document aims to rectify the situation by encouraging removal of
+   support for all these RR types in DNS implementations.  This should
+   cause few if any operational problems, because these types are not in
+   use on the Internet.  [COMMENT: Some data?]
 
 7.  Acknowledgements
 
-   Peter van Dijk for poking me to write the draft.  Daniel Salzman for
-   reviewing the document.  Evan Hunt and Michael Casadevall to write
-   Implementation Considerations section.
+   Thanks to Peter van Dijk for prompting us to write the draft, Daniel
+   Salzman for reviewing, and Michael Casadevall for contributions to
+   the Implementation Considerations section.
 
 8.  References
 
@@ -208,8 +212,19 @@ Internet-Draft        Deprecating old mail RRTYPES            March 2018
 
    [DNS-IANA]
               "Domain Name System (DNS) Parameters",
-              <https://www.iana.org/assignments/dns-parameters/
-              dns-parameters.xhtml>.
+              <https://www.iana.org/assignments/dns-parameters/dns-
+              parameters.xhtml>.
+
+
+
+
+
+
+
+Sury                     Expires April 17, 2021                 [Page 4]
+
+Internet-Draft        Deprecating old mail RRTYPES          October 2020
+
 
 Author's Address
 
@@ -221,4 +236,45 @@ Author's Address
 
 
 
-Sury                   Expires September 27, 2018               [Page 4]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Sury                     Expires April 17, 2021                 [Page 5]
