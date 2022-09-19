@@ -6,7 +6,7 @@ workgroup		= "DNS Operations"
 area			= "Operations and Management"
 submissiontype	        = "IETF"
 ipr			= "trust200902"
-date			= 2021-04-14T09:00:00Z
+date			= 2022-09-19T09:00:00Z
 keyword			= [ "DNS", "RRTYPE", "RR" ]
 
 [seriesInfo]
@@ -22,10 +22,10 @@ organization	= "ISC"
  [author.address]
  email			= "ondrej@isc.org"
   [author.address.postal]
-  street		= "53 Main St."
+  street		= "PO Box 360"
   city			= "Newmarket"
   region		= "NH"
-  code			= "03824"
+  code			= "03857"
   country		= "USA"
 
 [[author]]
@@ -36,10 +36,10 @@ organization	= "ISC"
  [author.address]
  email			= "each@isc.org"
   [author.address.postal]
-  street		= "53 Main St."
+  street		= "PO Box 360"
   city			= "Newmarket"
   region		= "NH"
-  code			= "03824"
+  code			= "03857"
   country		= "USA"
 
 %%%
