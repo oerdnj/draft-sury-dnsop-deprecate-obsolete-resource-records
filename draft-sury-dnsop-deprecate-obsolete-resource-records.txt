@@ -5,8 +5,8 @@
 DNS Operations                                                   O. Sury
 Internet-Draft                                                   E. Hunt
 Updates: 1034, 1035, 3597, 4034 (if approved)                        ISC
-Intended status: Standards Track                           14 April 2021
-Expires: 16 October 2021
+Intended status: Standards Track                       19 September 2022
+Expires: 23 March 2023
 
 
              Deprecating Obsolete DNS Resource Record Types
@@ -15,9 +15,9 @@ Expires: 16 October 2021
 Abstract
 
    This document deprecates Resource Record (RR) Types that are either
-   no longer being used for anything meaningful or have been made
-   obsolete by other RFCs.  This document updates [RFC1034], [RFC1035],
-   [RFC3597], and [RFC4034].
+   no longer being used in any meaningful way the DNS, or have already
+   been rendered obsolete by other RFCs.  This document updates
+   [RFC1034], [RFC1035], [RFC3597], and [RFC4034].
 
 Status of This Memo
 
@@ -34,11 +34,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 October 2021.
+   This Internet-Draft will expire on 23 March 2023.
 
 Copyright Notice
 
-   Copyright (c) 2021 IETF Trust and the persons identified as the
+   Copyright (c) 2022 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Sury & Hunt              Expires 16 October 2021                [Page 1]
+Sury & Hunt               Expires 23 March 2023                 [Page 1]
 
-Internet-Draft             Deprecating RRTYPEs                April 2021
+Internet-Draft             Deprecating RRTYPEs            September 2022
 
 
 Table of Contents
@@ -76,14 +76,13 @@ Table of Contents
 1.  Introduction
 
    [RFC1035] and other documents have defined some Resource Record (RR)
-   Types that are no longer in common use, some of which have been
-   rendered obsolete by subsequent standards, but have never been
-   clearly deprecated in the context of the DNS.  In some cases there
-   have been interoperability problems between DNS implementations that
-   support these types and those that do not - for example, because of
-   DNS name compression in the wire format.  Continued support for these
-   RR Types imposes a complexity cost on new implementations for little
-   benefit.
+   Types that are no longer in common use.  Some of these have been
+   rendered obsolete by subsequent standards, but were never clearly
+   deprecated.  In some cases there have been interoperability problems
+   between DNS implementations that supported these types and those that
+   did not: for example, because of DNS name compression in the wire
+   format.  Continued support for these RR Types imposes a complexity
+   cost on new implementations for little benefit.
 
    This document formally deprecates such RR Types, allowing
    implementations to drop specific support for them.
@@ -96,23 +95,27 @@ Table of Contents
 
 2.  Deprecating MD, MF, MB, MG, MR, MINFO, MAILA, and MAILB RR Types
 
-   The MD, MF, MB, MG, MR, MINFO, MAILA, and MAILB RR Types aren't used
-   in any existing standards, and this documents deprecates their usage.
-   The MD, MF, MB, MG, MR, and MINFO RR Types RDATA contain a domain
-   name that could be compressed in the RDATA section.
+   The MD, MF, MB, MG, MR, MINFO, MAILA, and MAILB RR Types are not used
+   in any existing standards.  This document deprecates their usage.
+
+   The MD, MF, MB, MG, MR, and MINFO RR Types contain domain names in
+   their RDATA.  DNS compression MUST NOT be applied to these domain
+   names when sending.
 
    As an update to [RFC3597] and [RFC4034] this document specifies that
-   for MD, MF, MB, MG, MR, and MINFO RR types, the canonical form is
-   such that no downcasing of embedded domain names takes place, and is
-   otherwise identical to the canonical form specified in 6.2.
+   for MD, MF, MB, MG, MR, and MINFO RR types, the canonical form such
+   that they do NOT include downcasing of embedded domain names.
 
 
 
 
-Sury & Hunt              Expires 16 October 2021                [Page 2]
+Sury & Hunt               Expires 23 March 2023                 [Page 2]
 
-Internet-Draft             Deprecating RRTYPEs                April 2021
+Internet-Draft             Deprecating RRTYPEs            September 2022
 
+
+   Canonical forms otherwise remain as specified in Section 6.2 of
+   [RFC4034].
 
 3.  IANA Considerations
 
@@ -134,6 +137,10 @@ Internet-Draft             Deprecating RRTYPEs                April 2021
               +-------+-------+------------+---------------+
               | MINFO | 14    | DEPRECATED | This document |
               +-------+-------+------------+---------------+
+              | MAILB | 253   | DEPRECATED | This document |
+              +-------+-------+------------+---------------+
+              | MAILA | 254   | DEPRECATED | This document |
+              +-------+-------+------------+---------------+
 
                      Table 1: Updates to DNS RR Types
 
@@ -153,25 +160,23 @@ Internet-Draft             Deprecating RRTYPEs                April 2021
        DEPRECATED RR Types for received data for backward compatibility
        if desired, but SHOULD warn if such information is received.
        Compressed RDATA in DEPRECATED RR Types MUST be uncompressed
-       before sending and they MUST NOT be re-transmitted;
+       before sending, and MUST NOT be re-transmitted in compressed
+       form;
+
+
+
+Sury & Hunt               Expires 23 March 2023                 [Page 3]
+
+Internet-Draft             Deprecating RRTYPEs            September 2022
+
 
    4.  DNS Clients which receive DEPRECATED RR Types MAY interpret them
-       as unknown RR types ([RFC3597]), and MUST NOT interfere with
+       as unknown RR Types ([RFC3597]), and MUST NOT interfere with
        their transmission;
 
    5.  DNSSEC Validators and Signers SHOULD treat RDATA for DEPRECATED
        RR Types as opaque with respect to canonical RR ordering and
        deduplication;
-
-
-
-Sury & Hunt              Expires 16 October 2021                [Page 3]
-
-Internet-Draft             Deprecating RRTYPEs                April 2021
-
-
-   6.  DEPRECATED RR Types MUST NOT be treated as a known type with
-       respect to the wire protocol.
 
 5.  Security Considerations
 
@@ -179,19 +184,19 @@ Internet-Draft             Deprecating RRTYPEs                April 2021
 
 6.  Operational Considerations
 
-   The varying states of implementation of MD, MF, MB, MG, MR, and MINFO
-   RR Types have already caused operational problems between DNS
-   implementations that do implement the aforementioned types and those
-   that don't, because of mismatched handling of DNS compression on the
-   wire.  This document aims to rectify the situation by encouraging
-   removal of support for all these RR types in all DNS implementations.
-   This should not cause signficant operational problems because these
-   records are not in wide use on the Internet.  [COMMENT: Some data?]
+   Varying states of implementation of MD, MF, MB, MG, MR, and MINFO RR
+   Types have already caused operational problems between DNS
+   implementations that did, and did not, implement them, as a result of
+   different behavior with resepect to DNS compression on the wire.
+   This document aims to rectify the situation by encourating removal of
+   support for all these RR Types in DNS implementations.  This should
+   cause few if any operational problems, because these types are not in
+   common use on the internet.
 
 7.  Acknowledgments
 
    The authors would like to thank Peter van Dijk for prompting us to
-   write the draft, Daniel Salzman for reviewing the document, and
+   write this draft, Daniel Salzman for reviewing the document, and
    Michael Casadevall for contributions to the Implementation
    Considerations section.
 
@@ -214,17 +219,17 @@ Internet-Draft             Deprecating RRTYPEs                April 2021
               (RR) Types", RFC 3597, DOI 10.17487/RFC3597, September
               2003, <https://www.rfc-editor.org/info/rfc3597>.
 
+
+
+Sury & Hunt               Expires 23 March 2023                 [Page 4]
+
+Internet-Draft             Deprecating RRTYPEs            September 2022
+
+
    [RFC4034]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "Resource Records for the DNS Security Extensions",
               RFC 4034, DOI 10.17487/RFC4034, March 2005,
               <https://www.rfc-editor.org/info/rfc4034>.
-
-
-
-Sury & Hunt              Expires 16 October 2021                [Page 4]
-
-Internet-Draft             Deprecating RRTYPEs                April 2021
-
 
 9.  Informative References
 
@@ -236,8 +241,8 @@ Authors' Addresses
 
    Ondřej Surý
    ISC
-   53 Main St.
-   Newmarket, NH 03824
+   PO Box 360
+   Newmarket, NH 03857
    United States of America
 
    Email: ondrej@isc.org
@@ -245,8 +250,8 @@ Authors' Addresses
 
    Evan Hunt
    ISC
-   53 Main St.
-   Newmarket, NH 03824
+   PO Box 360
+   Newmarket, NH 03857
    United States of America
 
    Email: each@isc.org
@@ -272,9 +277,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-Sury & Hunt              Expires 16 October 2021                [Page 5]
+Sury & Hunt               Expires 23 March 2023                 [Page 5]

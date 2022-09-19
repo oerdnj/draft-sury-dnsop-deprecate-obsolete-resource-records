@@ -9,9 +9,10 @@
 <meta content="Evan Hunt" name="author">
 <meta content="
        This document deprecates Resource Record (RR) Types that are
-either no longer being used for anything meaningful or have
-been made obsolete by other RFCs.  This document updates
- ,  ,  , and  . 
+either no longer being used in any meaningful way the DNS, or
+have already been rendered obsolete by other RFCs.  This
+document updates  ,  ,  , and
+ . 
     " name="description">
 <meta content="xml2rfc 2.40.0" name="generator">
 <meta content="DNS" name="keyword">
@@ -1059,11 +1060,11 @@ ol.type-I { list-style-type: lower-roman; }
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Deprecating RRTYPEs</td>
-<td class="right">April 2021</td>
+<td class="right">September 2022</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Sury &amp; Hunt</td>
-<td class="center">Expires 16 October 2021</td>
+<td class="center">Expires 23 March 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1079,12 +1080,12 @@ ol.type-I { list-style-type: lower-roman; }
 <a href="https://www.rfc-editor.org/rfc/rfc1034" class="eref">1034</a>, <a href="https://www.rfc-editor.org/rfc/rfc1035" class="eref">1035</a>, <a href="https://www.rfc-editor.org/rfc/rfc3597" class="eref">3597</a>, <a href="https://www.rfc-editor.org/rfc/rfc4034" class="eref">4034</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2021-04-14" class="published">14 April 2021</time>
+<time datetime="2022-09-19" class="published">19 September 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2021-10-16">16 October 2021</time></dd>
+<dd class="expires"><time datetime="2023-03-23">23 March 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1102,9 +1103,10 @@ ol.type-I { list-style-type: lower-roman; }
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This document deprecates Resource Record (RR) Types that are
-either no longer being used for anything meaningful or have
-been made obsolete by other RFCs.  This document updates
-<span>[<a href="#RFC1034" class="xref">RFC1034</a>]</span>, <span>[<a href="#RFC1035" class="xref">RFC1035</a>]</span>, <span>[<a href="#RFC3597" class="xref">RFC3597</a>]</span>, and <span>[<a href="#RFC4034" class="xref">RFC4034</a>]</span>.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+either no longer being used in any meaningful way the DNS, or
+have already been rendered obsolete by other RFCs.  This
+document updates <span>[<a href="#RFC1034" class="xref">RFC1034</a>]</span>, <span>[<a href="#RFC1035" class="xref">RFC1035</a>]</span>, <span>[<a href="#RFC3597" class="xref">RFC3597</a>]</span>, and
+<span>[<a href="#RFC4034" class="xref">RFC4034</a>]</span>.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1125,7 +1127,7 @@ been made obsolete by other RFCs.  This document updates
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 16 October 2021.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 March 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1134,7 +1136,7 @@ been made obsolete by other RFCs.  This document updates
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2021 IETF Trust and the persons identified as the
+            Copyright (c) 2022 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1199,14 +1201,13 @@ been made obsolete by other RFCs.  This document updates
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
 <p id="section-1-1"><span>[<a href="#RFC1035" class="xref">RFC1035</a>]</span> and other documents have defined some
-Resource Record (RR) Types that are no longer in common use,
-some of which have been rendered obsolete by subsequent standards,
-but have never been clearly deprecated in the context of the DNS.
-In some cases there have been interoperability problems between
-DNS implementations that support these types and those that do
-not - for example, because of DNS name compression in the
-wire format. Continued support for these RR Types imposes a
-complexity cost on new implementations for little benefit.<a href="#section-1-1" class="pilcrow">¶</a></p>
+Resource Record (RR) Types that are no longer in common use.
+Some of these have been rendered obsolete by subsequent standards,
+but were never clearly deprecated.  In some cases there have been
+interoperability problems between DNS implementations that supported
+these types and those that did not: for example, because of DNS name
+compression in the wire format. Continued support for these RR Types
+imposes a complexity cost on new implementations for little benefit.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">This document formally deprecates such RR Types, allowing
 implementations to drop specific support for them.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <div id="terminology">
@@ -1227,14 +1228,15 @@ and <span class="bcp14">OPTIONAL</span> in this document are to be interpreted a
       <h2 id="name-deprecating-md-mf-mb-mg-mr-">
 <a href="#section-2" class="section-number selfRef">2. </a><a href="#name-deprecating-md-mf-mb-mg-mr-" class="section-name selfRef">Deprecating MD, MF, MB, MG, MR, MINFO, MAILA, and MAILB RR Types</a>
       </h2>
-<p id="section-2-1">The MD, MF, MB, MG, MR, MINFO, MAILA, and MAILB RR Types aren't used in any
-existing standards, and this documents deprecates their usage.  The MD, MF,
-MB, MG, MR, and MINFO RR Types RDATA contain a domain name that could be
-compressed in the RDATA section.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">As an update to <span>[<a href="#RFC3597" class="xref">RFC3597</a>]</span> and <span>[<a href="#RFC4034" class="xref">RFC4034</a>]</span> this document specifies that
-for MD, MF, MB, MG, MR, and MINFO RR types, the canonical form is such that
-no downcasing of embedded domain names takes place, and is otherwise
-identical to the canonical form specified in <a href="https://rfc-editor.org/rfc/rfc4034" class="relref">6.2</a>.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-1">The MD, MF, MB, MG, MR, MINFO, MAILA, and MAILB RR Types are not used in
+any existing standards.  This document deprecates their usage.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-2-2">The MD, MF, MB, MG, MR, and MINFO RR Types contain domain names in their
+RDATA. DNS compression MUST NOT be applied to these domain names when
+sending.<a href="#section-2-2" class="pilcrow">¶</a></p>
+<p id="section-2-3">As an update to <span>[<a href="#RFC3597" class="xref">RFC3597</a>]</span> and <span>[<a href="#RFC4034" class="xref">RFC4034</a>]</span> this document specifies that
+for MD, MF, MB, MG, MR, and MINFO RR types, the canonical form such that
+they do NOT include downcasing of embedded domain names.  Canonical forms
+otherwise remain as specified in <span><a href="https://rfc-editor.org/rfc/rfc4034" class="relref">Section 6.2</a> of [<a href="#RFC4034" class="xref">RFC4034</a>]</span>.<a href="#section-2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana">
@@ -1294,6 +1296,18 @@ Parameters" (<span>[<a href="#DNS-IANA" class="xref">DNS-IANA</a>]</span>) as fo
             <td class="text-left" rowspan="1" colspan="1">DEPRECATED</td>
             <td class="text-left" rowspan="1" colspan="1">This document</td>
           </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">MAILB</td>
+            <td class="text-left" rowspan="1" colspan="1">253</td>
+            <td class="text-left" rowspan="1" colspan="1">DEPRECATED</td>
+            <td class="text-left" rowspan="1" colspan="1">This document</td>
+          </tr>
+          <tr>
+            <td class="text-left" rowspan="1" colspan="1">MAILA</td>
+            <td class="text-left" rowspan="1" colspan="1">254</td>
+            <td class="text-left" rowspan="1" colspan="1">DEPRECATED</td>
+            <td class="text-left" rowspan="1" colspan="1">This document</td>
+          </tr>
         </tbody>
       </table>
 </section>
@@ -1319,21 +1333,17 @@ to wire format;<a href="#section-4-2.2.1" class="pilcrow">¶</a></p>
           <p id="section-4-2.3.1">Recursive DNS Servers MAY support legacy compression in DEPRECATED RR
 Types for received data for backward compatibility if desired, but
 SHOULD warn if such information is received.  Compressed RDATA in
-DEPRECATED RR Types MUST be uncompressed before sending and they MUST
-NOT be re-transmitted;<a href="#section-4-2.3.1" class="pilcrow">¶</a></p>
+DEPRECATED RR Types MUST be uncompressed before sending, and MUST
+NOT be re-transmitted in compressed form;<a href="#section-4-2.3.1" class="pilcrow">¶</a></p>
 </li>
 <li id="section-4-2.4">
           <p id="section-4-2.4.1">DNS Clients which receive DEPRECATED RR Types MAY interpret them as
-unknown RR types (<span>[<a href="#RFC3597" class="xref">RFC3597</a>]</span>), and MUST NOT interfere with
+unknown RR Types (<span>[<a href="#RFC3597" class="xref">RFC3597</a>]</span>), and MUST NOT interfere with
 their transmission;<a href="#section-4-2.4.1" class="pilcrow">¶</a></p>
 </li>
 <li id="section-4-2.5">
           <p id="section-4-2.5.1">DNSSEC Validators and Signers SHOULD treat RDATA for DEPRECATED RR Types
 as opaque with respect to canonical RR ordering and deduplication;<a href="#section-4-2.5.1" class="pilcrow">¶</a></p>
-</li>
-<li id="section-4-2.6">
-          <p id="section-4-2.6.1">DEPRECATED RR Types MUST NOT be treated as a known type with respect to
-the wire protocol.<a href="#section-4-2.6.1" class="pilcrow">¶</a></p>
 </li>
 </ol>
 </section>
@@ -1351,14 +1361,13 @@ the wire protocol.<a href="#section-4-2.6.1" class="pilcrow">¶</a></p>
       <h2 id="name-operational-considerations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-operational-considerations" class="section-name selfRef">Operational Considerations</a>
       </h2>
-<p id="section-6-1">The varying states of implementation of MD, MF, MB, MG, MR, and MINFO RR
+<p id="section-6-1">Varying states of implementation of MD, MF, MB, MG, MR, and MINFO RR
 Types have already caused operational problems between DNS implementations
-that do implement the aforementioned types and those that don't, because of
-mismatched handling of DNS compression on the wire.  This document aims to
-rectify the situation by encouraging removal of support for all these RR
-types in all DNS implementations.  This should not cause signficant
-operational problems because these records are not in wide use on the
-Internet. [COMMENT: Some data?]<a href="#section-6-1" class="pilcrow">¶</a></p>
+that did, and did not, implement them, as a result of different behavior
+with resepect to DNS compression on the wire. This document aims to rectify
+the situation by encourating removal of support for all these RR Types in
+DNS implementations. This should cause few if any operational problems,
+because these types are not in common use on the internet.<a href="#section-6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ack">
@@ -1367,7 +1376,7 @@ Internet. [COMMENT: Some data?]<a href="#section-6-1" class="pilcrow">¶</a></p>
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="section-7-1">The authors would like to thank Peter van Dijk for prompting us to write
-the draft, Daniel Salzman for reviewing the document, and Michael
+this draft, Daniel Salzman for reviewing the document, and Michael
 Casadevall for contributions to the Implementation Considerations section.<a href="#section-7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1411,9 +1420,9 @@ Casadevall for contributions to the Implementation Considerations section.<a hre
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Ondřej Surý</span></div>
 <div dir="auto" class="left"><span class="org">ISC</span></div>
-<div dir="auto" class="left"><span class="street-address">53 Main St.</span></div>
+<div dir="auto" class="left"><span class="street-address">PO Box 360</span></div>
 <div dir="auto" class="left">
-<span class="locality">Newmarket</span>, <span class="region">NH</span> <span class="postal-code">03824</span>
+<span class="locality">Newmarket</span>, <span class="region">NH</span> <span class="postal-code">03857</span>
 </div>
 <div dir="auto" class="left"><span class="country-name">United States of America</span></div>
 <div class="email">
@@ -1424,9 +1433,9 @@ Casadevall for contributions to the Implementation Considerations section.<a hre
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Evan Hunt</span></div>
 <div dir="auto" class="left"><span class="org">ISC</span></div>
-<div dir="auto" class="left"><span class="street-address">53 Main St.</span></div>
+<div dir="auto" class="left"><span class="street-address">PO Box 360</span></div>
 <div dir="auto" class="left">
-<span class="locality">Newmarket</span>, <span class="region">NH</span> <span class="postal-code">03824</span>
+<span class="locality">Newmarket</span>, <span class="region">NH</span> <span class="postal-code">03857</span>
 </div>
 <div dir="auto" class="left"><span class="country-name">United States of America</span></div>
 <div class="email">
