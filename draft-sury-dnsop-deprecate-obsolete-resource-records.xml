@@ -1,196 +1,215 @@
-<?xml version="1.0"?>
-<?xml-stylesheet type='text/xsl' href='./rfc2629.xslt' ?>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- name="GENERATOR" content="github.com/mmarkdown/mmark Mmark Markdown Processor - mmark.miek.nl" -->
+<rfc version="3" ipr="trust200902" docName="draft-sury-dnsop-deprecate-obsolete-resource-records-02" submissionType="IETF" category="std" xml:lang="en" xmlns:xi="http://www.w3.org/2001/XInclude" updates="1034, 1035, 3597, 4034" indexInclude="true" consensus="true">
 
-<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
-<!ENTITY RFC2119 SYSTEM "http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
-<!ENTITY RFC1035 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1035.xml">
-<!ENTITY RFC3597 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3597.xml">
-<!ENTITY RFC4034 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4034.xml">
-]>
+<front>
+<title abbrev="Deprecating RRTYPEs">Deprecating Obsolete DNS Resource Record Types</title><seriesInfo value="draft-sury-dnsop-deprecate-obsolete-resource-records-02" status="standard" name="Internet-Draft"></seriesInfo>
+<author initials="O." surname="Sury" fullname="Ondřej Surý"><organization>ISC</organization><address><postal><street>PO Box 360</street>
+<city>Newmarket</city>
+<code>03857</code>
+<country>USA</country>
+<region>NH</region>
+</postal><email>ondrej@isc.org</email>
+</address></author><author initials="E." surname="Hunt" fullname="Evan Hunt"><organization>ISC</organization><address><postal><street>PO Box 360</street>
+<city>Newmarket</city>
+<code>03857</code>
+<country>USA</country>
+<region>NH</region>
+</postal><email>each@isc.org</email>
+</address></author><date year="2022" month="September" day="19"></date>
+<area>Operations and Management</area>
+<workgroup>DNS Operations</workgroup>
+<keyword>DNS</keyword>
+<keyword>RRTYPE</keyword>
+<keyword>RR</keyword>
 
-<?rfc toc="yes"?>
-<?rfc strict="yes" ?>
-<?rfc linkmailto="yes" ?>
-<?rfc symrefs="yes"?>
-<?rfc compact="yes" ?>
-<?rfc subcompact="no" ?>
-<?rfc sortrefs="no" ?>
-<?rfc rfcedstyle="yes"?>
+<abstract>
+<t>This document deprecates Resource Record (RR) Types that are
+either no longer being used in any meaningful way the DNS, or
+have already been rendered obsolete by other RFCs.  This
+document updates <xref target="RFC1034"></xref>, <xref target="RFC1035"></xref>, <xref target="RFC3597"></xref>, and
+<xref target="RFC4034"></xref>.</t>
+</abstract>
 
-<rfc ipr="trust200902" docName="draft-sury-deprecate-obsolete-resource-records-00" category="std" updates="1035,3597,4035">
+</front>
+
+<middle>
+
+<section anchor="introduction"><name>Introduction</name>
+<t><xref target="RFC1035"></xref> and other documents have defined some
+Resource Record (RR) Types that are no longer in common use.
+Some of these have been rendered obsolete by subsequent standards,
+but were never clearly deprecated.  In some cases there have been
+interoperability problems between DNS implementations that supported
+these types and those that did not: for example, because of DNS name
+compression in the wire format. Continued support for these RR Types
+imposes a complexity cost on new implementations for little benefit.</t>
+<t>This document formally deprecates such RR Types, allowing
+implementations to drop specific support for them.</t>
+
+<section anchor="terminology"><name>Terminology</name>
+<t>The key words <bcp14>MUST</bcp14>, <bcp14>MUST NOT</bcp14>, <bcp14>REQUIRED</bcp14>, <bcp14>SHALL</bcp14>,
+<bcp14>SHALL NOT</bcp14>, <bcp14>SHOULD</bcp14>, <bcp14>SHOULD NOT</bcp14>, <bcp14>RECOMMENDED</bcp14>, <bcp14>MAY</bcp14>,
+and <bcp14>OPTIONAL</bcp14> in this document are to be interpreted as described in
+<xref target="RFC2119"></xref>.</t>
+</section>
+</section>
+
+<section anchor="deprecating-md-mf-mb-mg-mr-minfo-maila-and-mailb-rr-types"><name>Deprecating MD, MF, MB, MG, MR, MINFO, MAILA, and MAILB RR Types</name>
+<t>The MD, MF, MB, MG, MR, MINFO, MAILA, and MAILB RR Types are not used in
+any existing standards.  This document deprecates their usage.</t>
+<t>The MD, MF, MB, MG, MR, and MINFO RR Types contain domain names in their
+RDATA. DNS compression MUST NOT be applied to these domain names when
+sending.</t>
+<t>As an update to <xref target="RFC3597"></xref> and <xref target="RFC4034"></xref> this document specifies that
+for MD, MF, MB, MG, MR, and MINFO RR types, the canonical form such that
+they do NOT include downcasing of embedded domain names.  Canonical forms
+otherwise remain as specified in <xref target="RFC4034" sectionFormat="of" relative="#" section="6.2"></xref>.</t>
+</section>
+
+<section anchor="iana"><name>IANA Considerations</name>
+<t>This document updates the IANA registry &quot;Domain Name System (DNS)
+Parameters&quot; (<xref target="DNS-IANA"></xref>) as follows:</t>
+<table><name>Updates to DNS RR Types
+</name>
+<thead>
+<tr>
+<th>TYPE</th>
+<th>Value</th>
+<th>Meaning</th>
+<th>Reference</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>MD</td>
+<td>3</td>
+<td>DEPRECATED</td>
+<td>This document</td>
+</tr>
+
+<tr>
+<td>MF</td>
+<td>4</td>
+<td>DEPRECATED</td>
+<td>This document</td>
+</tr>
+
+<tr>
+<td>MB</td>
+<td>7</td>
+<td>DEPRECATED</td>
+<td>This document</td>
+</tr>
+
+<tr>
+<td>MG</td>
+<td>8</td>
+<td>DEPRECATED</td>
+<td>This document</td>
+</tr>
+
+<tr>
+<td>MR</td>
+<td>9</td>
+<td>DEPRECATED</td>
+<td>This document</td>
+</tr>
+
+<tr>
+<td>MINFO</td>
+<td>14</td>
+<td>DEPRECATED</td>
+<td>This document</td>
+</tr>
+
+<tr>
+<td>MAILB</td>
+<td>253</td>
+<td>DEPRECATED</td>
+<td>This document</td>
+</tr>
+
+<tr>
+<td>MAILA</td>
+<td>254</td>
+<td>DEPRECATED</td>
+<td>This document</td>
+</tr>
+</tbody>
+</table></section>
+
+<section anchor="implementation"><name>Implementation Considerations</name>
+<t>Obsolete types will be flagged as DEPRECATED in the IANA registry, and the
+following guidance is given to DNS implementors in the handling of these RR
+types:</t>
+
+<ol>
+<li><t>Authoritative DNS Servers SHOULD issue a warning when loading zones that
+contain DEPRECATED RR Types;</t>
+</li>
+<li><t>DNS Servers MUST NOT compress RDATA when rendering DEPRECATED RR Types
+to wire format;</t>
+</li>
+<li><t>Recursive DNS Servers MAY support legacy compression in DEPRECATED RR
+Types for received data for backward compatibility if desired, but
+SHOULD warn if such information is received.  Compressed RDATA in
+DEPRECATED RR Types MUST be uncompressed before sending, and MUST
+NOT be re-transmitted in compressed form;</t>
+</li>
+<li><t>DNS Clients which receive DEPRECATED RR Types MAY interpret them as
+unknown RR Types (<xref target="RFC3597"></xref>), and MUST NOT interfere with
+their transmission;</t>
+</li>
+<li><t>DNSSEC Validators and Signers SHOULD treat RDATA for DEPRECATED RR Types
+as opaque with respect to canonical RR ordering and deduplication;</t>
+</li>
+</ol>
+</section>
+
+<section anchor="security"><name>Security Considerations</name>
+<t>This document has no security considerations.</t>
+</section>
+
+<section anchor="operation"><name>Operational Considerations</name>
+<t>Varying states of implementation of MD, MF, MB, MG, MR, and MINFO RR
+Types have already caused operational problems between DNS implementations
+that did, and did not, implement them, as a result of different behavior
+with resepect to DNS compression on the wire. This document aims to rectify
+the situation by encourating removal of support for all these RR Types in
+DNS implementations. This should cause few if any operational problems,
+because these types are not in common use on the internet.</t>
+</section>
+
+<section anchor="ack"><name>Acknowledgments</name>
+<t>The authors would like to thank Peter van Dijk for prompting us to write
+this draft, Daniel Salzman for reviewing the document, and Michael
+Casadevall for contributions to the Implementation Considerations section.</t>
+</section>
+
+</middle>
+
+<back>
+<references><name>Normative References</name>
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1034.xml"/>
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1035.xml"/>
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml"/>
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3597.xml"/>
+<xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4034.xml"/>
+</references>
+<references><name>Informative References</name>
+<reference anchor="DNS-IANA" target="https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml">
   <front>
-    <title abbrev="Deprecating old mail RRTYPES">Deprecating obsolete DNS Resource Records Types</title>
-    <author fullname="Ondrej Sury" initials="O." surname="Sury">
-      <organization>Internet Systems Consortium</organization>
-      <address>
-	<postal>
-	  <street/>
-	  <country>CZ</country>
-	</postal>
-        <email>ondrej@isc.org</email>
-      </address>
+    <title>Domain Name System (DNS) Parameters</title>
+    <author>
+      <organization></organization>
     </author>
-    <date year="2018"/>
-    <area>Ops</area>
-    <workgroup>dnsop</workgroup>
-    <keyword>Internet-Draft</keyword>
-    <abstract>
-      <t>
-	This document deprecates Resource Records (RR) Types that are
-	either not being used for anything meaningful or were been
-	already made obsolete by other RFCs.  This document updates
-	<xref target="RFC1035"/>, <xref target="RFC1035"/>, <xref
-	target="RFC4034"/>.
-      </t>
-    </abstract>
+    <date></date>
   </front>
-  <!-- ====================================================================== -->
-  <middle>
+</reference>
+</references>
 
-    <section anchor="introduction" title="Introduction">
-      <t>
-	<xref target="RFC1035"/> and other documents have defined some
-	Resource Record (RR) Types that are no longer in common use,
-	some of which have been rendered obsolete by subsequent standards,
-	but have never been clearly deprecated in the context of the DNS.
-	In some cases there have been interoperability problems between
-	DNS implementations that support these types and those that do
-	not - for example, because of DNS name compression in the
-	wire format. Continued support for these RR Types imposes a
-	complexity cost on new implementations for little benefit.
-      </t>
-      <t>
-	This document formally deprecates such RR Types, allowing
-	implementations to drop specific support for them.
-      </t>
-    </section>
+</back>
 
-    <section title="Deprecating MD, MF, MB, MG, MR, MINFO, MAILA, and MAILBRR Types">
-      <t>
-	The MD, MF, MB, MG, MR, MINFO, MAILA, and MAILB RR Types
-	aren't used in any existing standards, and this documents
-	deprecates their usage.  The MD, MF, MB, MG, MR, and MINFO RR
-	Types RDATA contain a domain name that could be compressed in
-	the RDATA section.
-      </t>
-
-      <t>
-	As an update to <xref target="RFC3597"/> and <xref
-	target="RFC4034"/> this document specifies that for MD, MF,
-	MB, MG, MR, and MINFO RR types, the canonical form is such
-	that no downcasing of embedded domain names takes place, and
-	is otherwise identical to the canonical form specified in <xref
-	target="RFC4034"/> section 6.2.
-      </t>
-    </section>
-
-    <section anchor="iana" title="IANA Considerations">
-      <t>This documents updates the IANA registry "Domain Name System (DNS) Parameters" (<xref target="DNS-IANA"/>).</t>
-	
-      <texttable>
-        <ttcol>TYPE</ttcol>     <ttcol>Value</ttcol>      <ttcol>Meaning</ttcol>      <ttcol>Reference</ttcol>
-	<c>MD</c>               <c>3</c>                  <c>DEPRECATED</c> <c>This document</c>
-	<c>MF</c>               <c>4</c>                  <c>DEPRECATED</c> <c>This document</c>
-	<c>MB</c>               <c>7</c>                  <c>DEPRECATED</c> <c>This document</c>
-	<c>MG</c>               <c>8</c>                  <c>DEPRECATED</c> <c>This document</c>
-	<c>MR</c>               <c>9</c>                  <c>DEPRECATED</c> <c>This document</c>
-	<c>MINFO</c>            <c>14</c>                 <c>DEPRECATED</c> <c>This document</c>
-      </texttable>
-    </section>
-
-    <section anchor="implementation" title="Implementation Considerations">
-      <t>
-	  Types will be flagged as obsolete/deprecated in the IANA
-	  registry, and the following guidance is given to DNS
-	  implementors in the handling of obsolete/deprecated RR
-	  types:
-	  <list style="numbers">
-	    <t>
-	      Authoritative DNS Servers SHOULD issue a warning when
-	      loading zones that contain DEPRECATED RR Types;
-	    </t>
-
-	    <t>
-	      DNS Servers MUST NOT compress RDATA when rendering
-	      DEPRECATED RR Types to wire format;
-	    </t>
-
-	    <t>
-	      Recursive DNS Servers MAY support legacy compression in
-	      DEPRECATED RR Types for received data for backward
-	      compatibility if desired, but SHOULD warn if such
-	      information is received.  Compressed RDATA in DEPRECATED
-	      RR Types MUST be uncompressed before sending and they
-	      MUST NOT be re-transmitted;
-	    </t>
-	    
-	    <t>
-	      DNS Clients which receive DEPRECATED RR Types MAY
-	      interpret them as unknown RR types (<xref
-	      target="RFC3597"/>), and MUST NOT interfere with their
-	      transmission;
-	    </t>
-	    
-	    <t>
-	      DNSSEC Validators and Signers SHOULD treat RDATA for
-	      DEPRECATED RR Types as opaque with respect to canonical
-	      RR ordering and deduplication;
-	    </t>
-
-	    <t>
-	      DEPRECATED RR Types MUST never be treated as a
-	      known-type with respect to the wire protocol.
-	    </t>
-	  </list>
-      </t>
-    </section>
-    
-    <section anchor="security" title="Security Considerations">
-      <t>
-	This document has no security considerations.
-      </t>
-    </section>
-
-    <section anchor="operation" title="Operational Considerations">
-      <t>
-	The varying states of implementation of MD, MF, MB, MG,
-	MR, and MINFO RR Types has already caused operational problems
-	between DNS implementations that do implement the aforementioned
-	types and those that don't because of DNS compression on the wire.
-	This document aims to rectify the situation by encouraging removal
-	of support for all these RR types in DNS implementations.  This
-	should not cause signficant operational problems because these
-	records are not in wide use on the Internet. [COMMENT: Some data?]
-      </t>
-    </section>
-
-    <section anchor="ack" title="Acknowledgements">
-      <t>
-	Peter van Dijk for poking me to write the draft.  Daniel
-	Salzman for reviewing the document.  Evan Hunt and Michael
-	Casadevall to write Implementation Considerations section.
-      </t>
-    </section>
-
-  </middle>
-  <!-- ====================================================================== -->
-  <back>
-    <references title="Normative References">
-      &RFC1035;
-      &RFC3597;
-      &RFC4034;
-    </references>
-    <references title="Informative References">
-      <reference anchor="DNS-IANA" target="https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml">
-        <front>
-          <title>Domain Name System (DNS) Parameters</title>
-          <author initials="" surname="" fullname="">
-            <organization />
-          </author>
-          <date />
-        </front>
-      </reference>
-    </references>
-    <!-- ====================================================================== -->
-  </back>
 </rfc>
